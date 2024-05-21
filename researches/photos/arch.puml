@@ -1,0 +1,30 @@
+@startuml
+
+
+skinparam arrowthickness 3
+skinparam defaultFontName Arial
+skinparam defaultFontSize 18
+skinparam roundCorner 50
+
+rectangle UI as ui #line.bold
+cloud Storage as storage #line.bold
+rectangle API as api #line.bold
+rectangle "Workers" #line.dashed {
+    rectangle worker_NDVI as ndvi #line.bold
+    rectangle worker_DVI as dvi #line.bold
+}
+
+database SQL_DB as db #line.bold
+
+ui <--> storage
+ui --> api
+
+api <--> db
+
+ndvi <--> storage
+dvi <--> storage
+
+ndvi <-[#red]-> api
+dvi <-[#red]-> api
+
+@enduml
